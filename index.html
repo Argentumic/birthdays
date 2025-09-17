@@ -7,5 +7,22 @@
 </head>
 <body>
     <h1>Колись тут буде класний сайт з днями народження!</h1>
+    <p>(тест)</p>
+
+<script type='text/javascript'>    
+async function getData() {
+  const url =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
+  const response = await fetch(url);
+  const result = await response.text();
+	const splittedResult = result.split("\r\n");
+	const rejoinedResult = splittedResult.join();
+	const FinalResult = rejoinedResult.split(",");
+  console.log(FinalResult);
+}
+
+getData();
+</script>
+
 </body>
 </html>
