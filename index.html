@@ -14,7 +14,7 @@ async function getData() {
   const url =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
   const response = await fetch(url);
-  const result = await response;
+  const result = await response.text();
   console.log(result);
 }
 
