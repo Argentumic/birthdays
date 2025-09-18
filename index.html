@@ -57,9 +57,8 @@
         tableBody.appendChild(tr);
     });
   }
-  if (document.cookie){
+  if (document.cookie != ""){
     document.getElementById("urlInput").value = document.cookie.split("; ").find((row) => row.startsWith("url="))?.split("=")[1] + "=csv";
-    getData()
   }
 
 </script>
