@@ -16,12 +16,22 @@
     <tbody class="table-group-divider">
     </tbody>
   </table>
+  <form class="row mb-3">
+    <div class="col-auto flex-grow-1 mb-3">
+      <textarea class="form-control" type="url" name="url-input" id="urlInput" placeholder="https://docs.google.com/spreadsheets/....."></textarea>
+    </div>
+    <div class="col-auto">
+      <button type="button" onclick="getData()" class="btn btn-dark">Застосувати</button>
+    </div>
+  </form>
 </div>
 
 <script type="text/javascript">
     async function getData() {
-      const url =
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
+      const url = document.getElementById("urlInput").value;
+
+      document.cookie = "url="+document.getElementById("urlInput").value+"; path=/"; 
+
       const response = await fetch(url);
       const result = await response.text();
       const finalResult = result.split("\r\n").map(row => row.split(","));
@@ -47,7 +57,11 @@
         tableBody.appendChild(tr);
     });
   }
-  window.onload = getData;
+  if (document.cookie){
+    document.getElementById("urlInput").value = document.cookie.split("; ").find((row) => row.startsWith("url="))?.split("=")[1] + "=csv";
+    getData()
+  }
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
