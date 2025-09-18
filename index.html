@@ -4,34 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Дні народження</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-  <!-- afterbegin -->
-    <h1>Колись тут буде класний сайт з днями народження!</h1>
-    <p>(тест)</p>
-  <!-- beforeend -->
-</body>
-<script type='text/javascript'>    
-async function getAndShow() {
-  const url =
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
-  const response = await fetch(url);
-  const result = await response.text();
-	const splittedResult = result.split("\r\n");
-	const rejoinedResult = splittedResult.join();
-	const FinalResult = rejoinedResult.split(",");
+<div class="container mt-5">
+  <table class="table table-bordered" id="data-table">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Прізвище Ім'я</th>
+        <th>Дата</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    </tbody>
+  </table>
+</div>
 
-  const dataLength = FinalResult.length;
-  let i = 0;
-  const dataDiv = document.createElement("div");
-  while (i < dataLength){
-    let dataToInsert = document.createTextNode(FinalResult[i]);
-    dataDiv.appendChild(dataToInsert);
-    i++;
+<script type="text/javascript">
+    async function getData() {
+      const url =
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
+      const response = await fetch(url);
+      const result = await response.text();
+      const finalResult = result.split("\r\n").map(row => row.split(",")).splice(0,3);
+      const tableBody = document.querySelector('#data-table tbody');
+      finalResult.forEach(row => {
+        const tr = document.createElement('tr');
+        row.forEach(cell => {
+          const td = document.createElement('td');
+          td.textContent = cell.trim();
+          tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
+    });
   }
-  document.body.insertAdjacentElement("beforeend", dataDiv);
-}
-
-getAndShow();
+  window.onload = getData;
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
 </html>
