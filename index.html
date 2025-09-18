@@ -6,11 +6,13 @@
     <title>Дні народження</title>
 </head>
 <body>
+  <!-- afterbegin -->
     <h1>Колись тут буде класний сайт з днями народження!</h1>
     <p>(тест)</p>
-
+  <!-- beforeend -->
+</body>
 <script type='text/javascript'>    
-async function getData() {
+async function getAndShow() {
   const url =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
   const response = await fetch(url);
@@ -18,11 +20,18 @@ async function getData() {
 	const splittedResult = result.split("\r\n");
 	const rejoinedResult = splittedResult.join();
 	const FinalResult = rejoinedResult.split(",");
-  console.log(FinalResult);
+
+  const dataLength = FinalResult.length;
+  let i = 0;
+  const dataDiv = document.createElement("div");
+  while (i < dataLength){
+    let dataToInsert = document.createTextNode(FinalResult[i]);
+    dataDiv.appendChild(dataToInsert);
+    i++;
+  }
+  document.body.insertAdjacentElement("beforeend", dataDiv);
 }
 
-getData();
+getAndShow();
 </script>
-
-</body>
 </html>
