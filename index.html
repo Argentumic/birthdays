@@ -21,7 +21,7 @@ async function getAndShow() {
 	const rejoinedResult = splittedResult.join();
 	const FinalResult = rejoinedResult.split(",");
 
-  const dataLength = length(FinalResult);
+  const dataLength = FinalResult.length;
   let i = 0;
   const dataDiv = document.createElement("div");
   while (i < dataLength){
