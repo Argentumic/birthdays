@@ -36,7 +36,9 @@
       const result = await response.text();
       const finalResult = result.split("\r\n").map(row => row.split(","));
       const tableBody = document.querySelector('#data-table tbody');
+      tableBody.innerHTML = "";
       const tableHeader = document.querySelector('#data-table thead');
+      tableHeader.innerHTML = "";
       
       const header = finalResult[0];
         const tr = document.createElement('tr');
