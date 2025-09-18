@@ -27,7 +27,7 @@
         'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
       const response = await fetch(url);
       const result = await response.text();
-      const finalResult = result.split("\r\n").map(row => row.split(",")).splice(0,3);
+      const finalResult = result.split("\r\n").map(row => row.split(",")).slice(3);
       const tableBody = document.querySelector('#data-table tbody');
       finalResult.forEach(row => {
         const tr = document.createElement('tr');
