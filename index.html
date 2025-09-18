@@ -13,10 +13,6 @@
 </body>
 <script type='text/javascript'>    
 async function getAndShow() {
-  await displayData(getData())
-}
-
-async function getData() {
   const url =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTy4CbcRFa6kC088Z4jrVKVk3QPjJ7uU6j4S_5ukmGfPVJLe_aIKPo4tiyALxrIV6ee8Br5GT-yyKuj/pub?output=csv';
   const response = await fetch(url);
@@ -24,15 +20,12 @@ async function getData() {
 	const splittedResult = result.split("\r\n");
 	const rejoinedResult = splittedResult.join();
 	const FinalResult = rejoinedResult.split(",");
-  return FinalResult;
-}
 
-async function displayData(data) {
-  const dataLength = length(data);
+  const dataLength = length(FinalResult);
   let i = 0;
   const dataDiv = document.createElement("div");
   while (i < dataLength){
-    let dataToInsert = document.createTextNode(data[i]);
+    let dataToInsert = document.createTextNode(FinalResult[i]);
     dataDiv.appendChild(dataToInsert);
     i++;
   }
